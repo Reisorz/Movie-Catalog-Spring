@@ -65,17 +65,28 @@ public class MovieCatalogApplication implements CommandLineRunner{
 	}
 
 	private void realizarAccion (Integer opcion) {
+		Scanner scan = new Scanner(System.in);
 		switch (opcion) {
             case 1:
-				List<Pelicula> peliculas = listarPeliculas();
-				logger.info(nl + "Películas: " + nl);
+				List<Pelicula> peliculas = peliculaServicio.listarPeliculas();
+				logger.info(nl + "*** Lista de películas ***" + nl);
 				for (Pelicula pelicula : peliculas) {
 					logger.info(pelicula.toString());
 				}
                 break;
             
             case 2:
-                
+				
+				Pelicula pelicula = new Pelicula();
+                logger.info(nl + "*** Añadir película ***" + nl);
+				logger.info("Escriba el nombre de la película a añadir: ");
+				pelicula.setNombre(scan.nextLine());
+				logger.info("Escriba el año de la película a añadir: ");
+				pelicula.setYear(Integer.parseInt(scan.nextLine()));
+				logger.info("Escriba la puntuación de la película a añadir: ");
+				pelicula.setPuntuacion(Double.parseDouble(scan.nextLine()));
+				peliculaServicio.guardarPelicula(pelicula);
+				logger.info("Película añadida: " + pelicula.toString());
                 break;
 
             case 3:
@@ -104,10 +115,6 @@ public class MovieCatalogApplication implements CommandLineRunner{
 
 	}
 
-	private List<Pelicula> listarPeliculas () {
-		List<Pelicula> peliculas = new ArrayList<>();
-		peliculas = peliculaServicio.listarPeliculas();
-		return peliculas;
-	}
+
 
 }
