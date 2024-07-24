@@ -130,7 +130,14 @@ public class MovieCatalogApplication implements CommandLineRunner{
                 break;
 
             case 5:
-                
+				Pelicula peliculaBorrar = new Pelicula();
+				int idBorrar = 0;
+                logger.info(nl + "*** Borrar película ***" + nl);
+				logger.info("Escriba el id de la película a borrar: ");
+				idBorrar = Integer.parseInt(scan.nextLine());
+				peliculaBorrar = peliculaServicio.buscarPeliculaPorId(idBorrar);
+				peliculaServicio.eliminarPelicula(peliculaBorrar);
+				logger.info("Película borrada: " + peliculaBorrar.toString());
                 break;
 
             case 6:
