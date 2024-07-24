@@ -60,7 +60,21 @@ public class MovieCatalogApplication implements CommandLineRunner{
 		"5 - Borrar película." + nl +
 		"6 - Cerrar aplicación." + nl + 
 		"Opcion: ");
-		int opcion = Integer.parseInt(scan.nextLine());
+		boolean isValid = false;
+		int opcion = 0;
+		while (isValid == false){
+			try {
+				opcion = Integer.parseInt(scan.nextLine());
+				isValid = true;
+				if(opcion < 1 || opcion > 6) {
+					isValid = false;
+					logger.info("Elija una opción válida.");
+				}
+			} catch (NumberFormatException e) {
+				logger.info("Elija una opción válida.");
+				isValid = false;
+			}
+		}
 		return opcion;
 	}
 
@@ -95,6 +109,13 @@ public class MovieCatalogApplication implements CommandLineRunner{
 
             case 4:
 
+				logger.info("Escriba el nombre de la película que busca: ");
+				String nombrePeliculaBuscada = scan.nextLine();
+				List<Pelicula> peliculas2 = peliculaServicio.buscarPeliculaPorNombre(nombrePeliculaBuscada);
+				for (Pelicula pelicula2 : peliculas2) {
+					logger.info(pelicula2.toString());
+				}
+
                 break;
 
             case 5:
@@ -108,7 +129,7 @@ public class MovieCatalogApplication implements CommandLineRunner{
         
             default:
 
-                System.out.println("Inserta una opción válidad.");
+                System.out.println("Elija una opción válidad.");
                 elegirOpcion();
                 break;
         }

@@ -12,4 +12,6 @@ public interface IPeliculaServicio {
     public void guardarPelicula (Pelicula pelicula);
 
     public void eliminarPelicula (Pelicula pelicula);
+
+    public List<Pelicula> buscarPeliculaPorNombre(String nombre);
 }

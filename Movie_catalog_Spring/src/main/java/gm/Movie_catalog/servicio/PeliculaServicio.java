@@ -35,5 +35,11 @@ public class PeliculaServicio implements IPeliculaServicio {
         List<Pelicula> peliculas = peliculaRepositorio.findAll();
         return peliculas;
     }
+
+    @Override
+    public List<Pelicula> buscarPeliculaPorNombre(String nombre) {
+        List<Pelicula> peliculas = peliculaRepositorio.findByNombreLike(nombre);
+        return peliculas;
+    }
     
 }
