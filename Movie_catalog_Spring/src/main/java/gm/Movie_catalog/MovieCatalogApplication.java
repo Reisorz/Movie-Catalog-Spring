@@ -104,11 +104,22 @@ public class MovieCatalogApplication implements CommandLineRunner{
                 break;
 
             case 3:
-
+				logger.info(nl + "*** Modificar película ***" + nl);
+				Pelicula peliculaModificar = new Pelicula();
+				logger.info("Escriga el id de la película a modificar: ");
+				peliculaModificar.setIdPelicula(Integer.parseInt(scan.nextLine()));
+				logger.info("Escriba el nuevo nombre de la película: ");
+				peliculaModificar.setNombre(scan.nextLine());
+				logger.info("Escriba el nuevo año de la película: ");
+				peliculaModificar.setYear(Integer.parseInt(scan.nextLine()));
+				logger.info("Escriba la nueva puntuación de la película: ");
+				peliculaModificar.setPuntuacion(Double.parseDouble(scan.nextLine()));
+				peliculaServicio.guardarPelicula(peliculaModificar);
+				logger.info("Película modificada correctamente: " + peliculaModificar.toString());
                 break;
 
             case 4:
-
+				logger.info(nl + "*** Buscar película ***" + nl);
 				logger.info("Escriba el nombre de la película que busca: ");
 				String nombrePeliculaBuscada = scan.nextLine();
 				List<Pelicula> peliculas2 = peliculaServicio.buscarPeliculaPorNombre(nombrePeliculaBuscada);
